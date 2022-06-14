@@ -20,8 +20,9 @@ public class tryout{
         CharBuffer cbuf = Charset.forName("UTF-8").newDecoder().decode(bbuf);
         // cbuf is now a sequence of chars which we created from the byteBuffer, which we created from the FileChannel
         return cbuf;
-
     }
+
+
 
     public static void countComments(String fileName) throws IOException{
         Pattern COUNT_COMMENTS_PATTERN = Pattern.compile("//."); 
@@ -60,6 +61,4 @@ public class tryout{
         countComments(s);
         countIf(s);
     }
-
-
 }
