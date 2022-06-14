@@ -23,21 +23,42 @@ public class tryout{
 
     }
 
-    public static void main(String[] args) throws IOException{
-
-        Pattern COUNT_LINES_PATTERN = Pattern.compile("\n");
+    public static void countComments(String fileName) throws IOException{
         Pattern COUNT_COMMENTS_PATTERN = Pattern.compile("//."); 
         Pattern COUNT_MULTI_COMMENTS_PATTERN = Pattern.compile("/[*](.|[\r\n])*?[*]/");
-
-        Matcher mlines = COUNT_LINES_PATTERN.matcher(fromFile("sampleCode.java"));
-        Matcher mcomments = COUNT_COMMENTS_PATTERN.matcher(fromFile("sampleCode.java"));
-        Matcher mMulti_comments = COUNT_MULTI_COMMENTS_PATTERN.matcher(fromFile("sampleCode.java"));   
-    
-        long lines = mlines.results().count();
+        
+        Matcher mcomments = COUNT_COMMENTS_PATTERN.matcher(fromFile(fileName));
+        Matcher mMulti_comments = COUNT_MULTI_COMMENTS_PATTERN.matcher(fromFile(fileName));
         long comments = mcomments.results().count();
         long multicomments = mMulti_comments.results().count();
         
-        System.out.println("Number of lines: " + lines + "\nNumber of Comments: " + (comments + multicomments) + "\nNumber of one-line-comments: " + comments + "\nNumber of Multiline comments: " + multicomments);
+        System.out.println("Number of Comments: " + (comments + multicomments) + "\nNumber of one-line-comments: " + comments + "\nNumber of Multiline comments: " + multicomments);
+    }
+
+    public static void countLines(String fileName) throws IOException{
+        Pattern COUNT_LINES_PATTERN = Pattern.compile("\n");
+
+        Matcher mlines = COUNT_LINES_PATTERN.matcher(fromFile(fileName));
+    
+        long lines = mlines.results().count();
+        System.out.println("Number of lines: " + (lines+1)); // first line doesn't get counted since its only counting the occurences of "\n"
+    }
+
+    public static void countIf(String fileName) throws IOException{
+        Pattern COUNT_IF_STATEMENTS_PATTERN = Pattern.compile("if[(].*?[)]");
+
+        Matcher mif = COUNT_IF_STATEMENTS_PATTERN.matcher(fromFile(fileName));
+        
+        long ifStatements = mif.results().count();
+        System.out.println("Number of if-statements: " + ifStatements);
+    }
+
+    public static void main(String[] args) throws IOException{
+        String s = "sampleCode.java";
+
+        countLines(s);
+        countComments(s);
+        countIf(s);
     }
 
 

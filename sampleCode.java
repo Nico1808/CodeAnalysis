@@ -16,7 +16,16 @@ public class sampleCode {
      * to find out
      * how
      * multilined comments work
-     */ 
+     */
+    int iwas = 10;
+    /* aölsdf */ // this is the ultimate test
+    /* alösjdf
+     * aölsdjf
+     * 
+     * asdf
+     * 
+     */
+
     public void sampleMethode(){
         for(int j = 0; j < i; j++){
             if((i%2) == 0){
@@ -24,9 +33,8 @@ public class sampleCode {
             }else{
 
             }
-            if(i==2){
-                System.out.println("zweiter durchlauf");
-            }
+            if(i==2){System.out.println("zweiter durchlauf");}
         }
+        if(true);
     }
 }
