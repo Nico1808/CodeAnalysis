@@ -35,6 +35,13 @@ public class sampleCode {
             }
             if(i==2){System.out.println("zweiter durchlauf");}
         }
+
+        for (int x = 12; x <= 13; x++)
+            System.out.println(2);
         if(true);
+
+        for (var i : new int[]{1,2,3}){
+            System.out.println(i);
+        }
     }
 }

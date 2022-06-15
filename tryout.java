@@ -54,11 +54,23 @@ public class tryout{
         System.out.println("Number of if-statements: " + ifStatements);
     }
 
+    public static void countForLoops(String fileName) throws IOException {
+        Pattern COUNT_FOR_LOOPS_PATTERN = Pattern.compile("for ?\\(.*?;.*?;.*?\\)");
+        Pattern COUNT_FOR_EACH_PATTERN = Pattern.compile("for ?\\(.*?:.*?\\)");
+
+        Matcher matchedForLoops = COUNT_FOR_LOOPS_PATTERN.matcher(fromFile(fileName));
+        Matcher matchedForEachLoops = COUNT_FOR_EACH_PATTERN.matcher(fromFile(fileName));
+
+        System.out.println("Number of For-Loops: " + matchedForLoops.results().count());
+        System.out.println("Number of For-Each-Loops: " + matchedForEachLoops.results().count());
+    }
+
     public static void main(String[] args) throws IOException{
         String s = "sampleCode.java";
 
         countLines(s);
         countComments(s);
         countIf(s);
+        countForLoops(s);
     }
 }
