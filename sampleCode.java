@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+
 public class sampleCode {
 
     private String s = new String();
@@ -43,5 +45,33 @@ public class sampleCode {
         for (var i : new int[]{1,2,3}){
             System.out.println(i);
         }
+    }//while
+
+    public void sampleMethodWhileLoops() {
+        int i = 5;
+        int a = 2;
+
+        while(i < 10) {
+            System.out.println(i);
+            i++;
+            while(a > 0){
+                System.out.println(a);
+                a--;
+            }
+        }
+
+        while(i == 0)
+            System.out.println("hä");
+
+        do{System.out.println("blah");} while(a > 90);
+
+        do{
+            System.out.println(i);
+            i++;
+        }while(i < 15);
+
+        do
+            a = 1+1;
+        while(a == 2);
     }
 }

@@ -65,6 +65,31 @@ public class tryout{
         System.out.println("Number of For-Each-Loops: " + matchedForEachLoops.results().count());
     }
 
+    public static void countWhileLoops(String fileName) throws IOException{
+        Pattern COUNT_WHILE_LOOPS_PATTERN = Pattern.compile
+                ("while" +
+                        "\\s*?" +    //checks for any number of Whitespace after the while statement
+                        "\\(.*?\\)" +    //checks if there is any or no content in the brackets after the while statement
+                        "\\s*?" +        //checks for any number of Whitespace after the brackets
+                        "\\{?" +         //checks for 0 or 1 brackets
+                        "(?!;)"          //checks that ";" is not included to exclude do-while loops
+                );
+
+        Pattern COUNT_DO_WHILE_LOOPS_PATTERN = Pattern.compile
+                ("do" +
+                        "\\s*?" +
+                        "\\{?" +
+                        ".*?" +
+                        "}?"
+                );
+
+        Matcher matchedWhileLoops = COUNT_WHILE_LOOPS_PATTERN.matcher(fromFile(fileName));
+        Matcher matchedDoWhileLoops = COUNT_DO_WHILE_LOOPS_PATTERN.matcher(fromFile(fileName));
+
+        System.out.println("Number of While-Loops: " + matchedWhileLoops.results().count());
+        System.out.println("Number of Do-While-Loops: " + matchedDoWhileLoops.results().count());
+    }
+
     public static void main(String[] args) throws IOException{
         String s = "sampleCode.java";
 
@@ -72,5 +97,6 @@ public class tryout{
         countComments(s);
         countIf(s);
         countForLoops(s);
+        countWhileLoops(s);
     }
 }
