@@ -29,7 +29,9 @@ public class sampleCode {
      */
 
     public void sampleMethode(){
-        for(int j = 0; j < i; j++){
+
+        for
+        (int j = 0; j < i; j++) {
             if((i%2) == 0){
                 System.out.println(s + i);
             }else{
@@ -38,13 +40,34 @@ public class sampleCode {
             if(i==2){System.out.println("zweiter durchlauf");}
         }
 
-        for (int x = 12; x <= 13; x++)
+        for
+        (int x = 12; x <= 13; x++)
             System.out.println(2);
         if(true);
 
-        for (var i : new int[]{1,2,3}){
+        for
+        (int x = 12; x <= 14; x++)
+            System.out.println(2);
+        if(true);
+
+        for 
+        (var i : new int[]{1,2,3}){
             System.out.println(i);
         }
+
+        for 
+        (var i : new int[]{1,2,3}){
+            System.out.println(i);
+        }
+
+        for (var i : new int[]{4,5,6}){
+            var s = i; 
+        }
+
+        for (var i = 2; i < 3; i++){
+            // do something
+        }
+
     }//while
 
     public void sampleMethodWhileLoops() {
