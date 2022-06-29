@@ -1,12 +1,12 @@
-# Code Analyse tool für moderne Programmierkonzepte
+# Code-Analysetool für "Moderne Programmierkonzepte"
 
 Nico:
-LineCounter
-CommentCounter
-if-statements
+  -> LineCounter
+  -> CommentCounter
+  -> if-statements
 
 Kevin:
-for-Schleifen
+  -> for-Schleifen
 
 Adrian:
-while-Schleifen
+  -> while-Schleifen
