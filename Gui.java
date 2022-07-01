@@ -1,5 +1,4 @@
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -7,10 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
-import javax.swing.border.EtchedBorder;
 import javax.swing.filechooser.FileSystemView;
 
 import java.awt.*;
@@ -37,7 +33,6 @@ public class Gui extends JFrame {
 
         // 3.1 Create panels for topLeftPanel 
         var dropFilePanel = new JPanel();
-        var topLeftFooterPanel = new JPanel(new FlowLayout());
 
         // 3.1.1 Fill dropFilePanel with file chooser
         var fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
