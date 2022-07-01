@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.regex.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -69,7 +70,7 @@ public class tryout {
                 "for" +
                         "\\s*?" + // checks for any number of whitespaces between for and the brackets
                         "\\(.*?;.*?;.*?\\)" + // checks for the format of a for-loop (.. ; .. ; .. )
-                        "\\\s*?" + // checks for any number of whitespaces after for-loop-initiation
+                        "\\s*?" + // checks for any number of whitespaces after for-loop-initiation
                         "\\{?" // checks for opening bracket after the for-loop-initiation (0 or 1, since it
                                // can be left out if the executing statement is a single-line-statement)
         );
@@ -77,13 +78,18 @@ public class tryout {
                 "for" +
                         "\\s*?" +
                         "\\(.*?:.*?\\)" + // checks for foreach-loop format (.. : ..)
-                        "\\\s*?" + // checks for any number of whitespaces after for-loop-initiation
+                        "\\s*?" + // checks for any number of whitespaces after for-loop-initiation
                         "\\{?" // checks for opening bracket after the for-loop-initiation (0 or 1, since it
                                // can be left out if the executing statement is a single-line-statement)
+        );
+
+        Pattern COUNT_FOR_PATTERN_PYTHON = Pattern.compile(
+            "for\s*(.*?)in\s*(.*?):"
         );
         
         Matcher matchedForLoops = COUNT_FOR_LOOPS_PATTERN.matcher(fromFile(fileName));
         Matcher matchedForEachLoops = COUNT_FOR_EACH_PATTERN.matcher(fromFile(fileName));
+        System.out.println(COUNT_FOR_PATTERN_PYTHON.matcher(fromFile(fileName)).results().count());
 
         System.out.println("Number of For-Loops: " + matchedForLoops.results().count());
         System.out.println("Number of For-Each-Loops: " + matchedForEachLoops.results().count());

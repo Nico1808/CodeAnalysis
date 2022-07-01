@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-
 public class sampleCode {
 
     private String s = new String();
@@ -40,6 +38,8 @@ public class sampleCode {
             if(i==2){System.out.println("zweiter durchlauf");}
         }
 
+        // for i in range(3):
+
         for
         (int x = 12; x <= 13; x++)
             System.out.println(2);
@@ -61,7 +61,7 @@ public class sampleCode {
         }
 
         for (var i : new int[]{4,5,6}){
-            var s = i; 
+            var s = i;
         }
 
         for (var i = 2; i < 3; i++){
