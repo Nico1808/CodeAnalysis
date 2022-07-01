@@ -5,7 +5,9 @@ JavaComment .
 PythonComment .
 JavaIf .
 PythonIf .
-JavaFor .
-PythonFor .
+JavaFor (for\s*)([(].*?;.*?;.*?[)])(\s*{?)
+PythonFor (for\s*)(.*?in\s)(\s*.*?):
+JavaForEach (for\s*)([(].*?:.*?[)])(\s*{?)
+PythonForEach (for\s*)(.*?in\s)(\s*.*?):
 JavaWhile .
 PythonWhile .
