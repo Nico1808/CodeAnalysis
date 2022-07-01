@@ -1,5 +1,6 @@
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -31,6 +32,27 @@ public class tryout {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static String patternFinder(String userInput) throws IOException{
+        Pattern USER_INPUT = Pattern.compile(userInput + "\s+(.+)");
+        Matcher mui = USER_INPUT.matcher(fromFile("Pattern.txt"));
+        String p = "";
+
+        try{
+            if(mui.find()){
+                p = mui.group(1);
+            }
+
+        }catch(IllegalStateException e){
+            System.out.println("No matches Found!");
+            e.printStackTrace();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return p;
     }
 
     public static void countComments(String fileName) throws IOException {
@@ -121,10 +143,13 @@ public class tryout {
     public static void main(String[] args) throws IOException {
         String s = "sampleCode.java";
 
-        countLines(s);
+        /*countLines(s);
         countComments(s);
         countIf(s);
         countForLoops(s);
-        countWhileLoops(s);
+        countWhileLoops(s);*/
+
+        System.out.println(patternFinder("hallo"));
+
     }
 }
