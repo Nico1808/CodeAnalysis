@@ -1,1 +1,11 @@
 hallo HalloTest
+JavaLines .
+PythonLines .
+JavaComment .
+PythonComment .
+JavaIf .
+PythonIf .
+JavaFor .
+PythonFor .
+JavaWhile .
+PythonWhile .
