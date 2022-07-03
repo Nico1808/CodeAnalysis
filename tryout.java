@@ -103,7 +103,7 @@ public class tryout {
         );
 
         Pattern COUNT_FOR_PATTERN_PYTHON = Pattern.compile(
-            "for\s*(.*?)in\s*(.*?):"
+            "(for\s*)(.*?in\s*)(.*?:)"
         );
         
         Matcher matchedForLoops = COUNT_FOR_LOOPS_PATTERN.matcher(fromFile(fileName));
