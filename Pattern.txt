@@ -6,10 +6,9 @@ JavaMultiComment /[*](.|[\r\n])*?[*]/
 PythonComment .
 JavaIf if[(].*?[)]
 PythonIf .
-JavaFor (for\\s*)([(].*?;.*?;.*?[)])(\\s*\\[{]?)
-PythonFor (for\\s*)(.*?in\\s)(\\s*.*?):
-JavaForEach (for\\s*)([(].*?:.*?[)])(\\s*\\[{]?)
-PythonForEach (for\\s*)(.*?in\\s)(\\s*.*?):
-JavaWhile (while\\s*?\\(.*?\\)\\s*?\\{?(?!;)
-JavaDoWhile (do\\s*?\\{?.*?}?)
-PythonWhile (while\\s*?.*?:)
+JavaFor (for\s*)([(].*?;.*?;.*?[)])(\s*[{]?)
+PythonFor (for\s*)(.*?in\\s)(\s*.*?):
+JavaForEach (for\s*)([(].*?:.*?[)])(\s*[{]?)
+JavaWhile (while\s*?[(].*?[)]s*?[{]?)(?!;)
+JavaDoWhile (do\s*?[{]?.*?[}]?)
+PythonWhile (while\s*?.*?:)

@@ -38,6 +38,7 @@ public class Analyzer {
             CharBuffer cbuf = Charset.forName("UTF-8").newDecoder().decode(bbuf);
             // cbuf is now a sequence of chars which we created from the byteBuffer, which
             // we created from the FileChannel
+            System.out.println(cbuf.toString());
             return cbuf;
 
         } catch (Exception e) {

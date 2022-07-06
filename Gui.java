@@ -111,7 +111,7 @@ public class Gui extends JFrame {
 
                 if (checkBoxLines.isSelected()) {
                     ;
-                    results.append("Number of Lines: " + analyzer.resultMatcher(language + "Lines") + " \n");
+                    results.append("Number of Lines: " + (analyzer.resultMatcher(language + "Lines") + 1l) + " \n");
                 }
                 if (checkBoxComments.isSelected()) {
                     results.append(
@@ -132,7 +132,10 @@ public class Gui extends JFrame {
                 }
                 if (checkBoxWhile.isSelected()) {
                     results.append(
-                            "Number of while-Loops: " + analyzer.resultMatcher(language + "Lines") + "\n");
+                            "Number of while-Loops: " + analyzer.resultMatcher(language + "While") + "\n");
+                    if (language == "Java"){
+                        results.append("Number of do-while-loops: " + analyzer.resultMatcher(language+"DoWhile"));
+                    }
                 }
                 bottomPanel.add(results);
                 mainFrame.pack();
