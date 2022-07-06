@@ -114,7 +114,7 @@ public class tryout {
         System.out.println("Number of For-Each-Loops: " + matchedForEachLoops.results().count());
     }
 
-    public static void countWhileLoopsJava(String fileName) throws IOException {
+    public static long countWhileLoopsJava(String fileName) throws IOException {
         Pattern COUNT_WHILE_LOOPS_PATTERN = Pattern.compile("while" +
                 "\\s*?" + // checks for any number of Whitespace after the while statement
                 "\\(.*?\\)" + // checks if there is any or no content in the brackets after the while
@@ -126,7 +126,7 @@ public class tryout {
 
         Matcher matchedWhileLoops = COUNT_WHILE_LOOPS_PATTERN.matcher(fromFile(fileName));
 
-        System.out.println("Number of While-Loops java: " + matchedWhileLoops.results().count());
+        return matchedWhileLoops.results().count();
     }
 
     public static void countDoWhileLoopsJava(String fileName) throws IOException {
@@ -141,7 +141,7 @@ public class tryout {
         System.out.println("Number of Do-While-Loops java: " + matchedDoWhileLoops.results().count());
     }
 
-    public static void countWhileLoopsPython(String fileName) throws IOException {
+    public static long countWhileLoopsPython(String fileName) throws IOException {
         Pattern COUNT_WHILE_LOOPS_PATTERN = Pattern.compile("while" +
                 "\\s*?" +
                 ".*?" +
@@ -149,7 +149,7 @@ public class tryout {
         );
 
         Matcher matchedWhileLoops = COUNT_WHILE_LOOPS_PATTERN.matcher(fromFile(fileName));
-        System.out.println("Number of While-Loops python: " + matchedWhileLoops.results().count());
+        return matchedWhileLoops.results().count();
     }
 
     public static void run() throws IOException {

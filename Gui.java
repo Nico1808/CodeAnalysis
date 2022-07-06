@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Gui extends JFrame {
-    
+
     Gui(String title){
         super(title);
     }
@@ -68,46 +68,10 @@ public class Gui extends JFrame {
 
         JButton ButtonRun = new JButton("Run");
         centerLeftPanel.add(ButtonRun);
-        ButtonRun.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    if(checkBoxComments.isSelected()){
-                        //tryout.countComments();
-                        System.out.println("comments");
-                    }
-                    if(checkBoxLines.isSelected()){
-                        //tryout.countLines();
-                        System.out.println("lines");
-                    }
-                    if(checkBoxIf.isSelected()){
-                        //tryout.countIf();
-                        System.out.println("if");
-                    }
-                    if(checkBoxFor.isSelected()){
-                        //tryout.countForLoops();
-                        System.out.println("for");
-                    }
-                    if(checkBoxWhile.isSelected()){
-                        //tryout.countWhileLoopsJava();
-                        System.out.println("while");
-                    }
-            }
-        });
 
         // 5.1.2 Fill centerRightPanel with content
         var languageLabel = new JLabel("Programming language:");
         var languageComboBox = new JComboBox<>(new String[]{"Java", "Python"});
-
-        //6.1 Fill Bottom Panel with content
-        JTextArea results = new JTextArea();
-        results.append("Number of Lines: \n");
-        results.append("Number of Comments: \n");
-        results.append("Number of if-Statements: \n");
-        results.append("Number of for-Loops: \n");
-        results.append("Number of while-Loops: \n");
-
-        //6.2 Add content to Bottom Panel
-        bottomPanel.add(results);
 
         // 3.2.2 Add content to topRightPanel
         centerRightPanel.add(languageLabel);
@@ -127,6 +91,57 @@ public class Gui extends JFrame {
         topPanel.setBorder(BorderFactory.createTitledBorder(etchedBorder, "Choose file"));
         centerPanel.setBorder(BorderFactory.createTitledBorder(etchedBorder, "Choose options:"));
         bottomPanel.setBorder(BorderFactory.createTitledBorder(etchedBorder, "Match results:"));
+
+        JTextArea results = new JTextArea(); //Erzeugen des Ergebnistextfeldes
+        results.setEditable(false);
+        ButtonRun.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                results.setText("");
+
+                try{
+                    if(languageComboBox.getSelectedItem().equals("Java")){
+                        if(checkBoxLines.isSelected()) {
+                            results.append("Number of Lines: \n");
+                        }
+                        if(checkBoxComments.isSelected()){
+                            results.append("Number of Comments: \n");
+                        }
+                        if(checkBoxIf.isSelected()) {
+                            results.append("Number of if-Statements: \n");
+                        }
+                        if(checkBoxFor.isSelected()) {
+                            results.append("Number of for-Loops: \n");
+                        }
+                        if(checkBoxWhile.isSelected()) {
+                            results.append("Number of while-Loops: " + tryout.countWhileLoopsJava("sampleCode.java") + "\n");
+                        }
+                    }
+                    if(languageComboBox.getSelectedItem().equals("Python")){
+                        if(checkBoxLines.isSelected()) {
+                            results.append("Number of Lines: \n");
+                        }
+                        if(checkBoxComments.isSelected()){
+                            results.append("Number of Comments: \n");
+                        }
+                        if(checkBoxIf.isSelected()) {
+                            results.append("Number of if-Statements: \n");
+                        }
+                        if(checkBoxFor.isSelected()) {
+                            results.append("Number of for-Loops: \n");
+                        }
+                        if(checkBoxWhile.isSelected()) {
+                            results.append("Number of while-Loops: " + tryout.countWhileLoopsPython("sampleCode.py") + "\n");
+                        }
+                    }
+                } catch (IOException ioException){
+                    ioException.printStackTrace();
+                    System.out.println(ioException.getMessage());
+                }
+                bottomPanel.add(results);
+                mainFrame.pack();
+            }
+        });
 
         mainFrame.pack();
         mainFrame.setVisible(true);
