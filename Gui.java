@@ -1,15 +1,12 @@
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Gui extends JFrame {
     
@@ -55,18 +52,62 @@ public class Gui extends JFrame {
         var centerLeftPanel = new JPanel(new GridLayout(7, 1));
         var centerRightPanel = new JPanel(new GridLayout(2, 1));
 
-        // 5.1 Fill bottom left panel with content
+        // 5.1 Fill center left panel with content
         centerLeftPanel.add(new JLabel("Search options"));
-        centerLeftPanel.add(new JRadioButton("Comments"));
-        centerLeftPanel.add(new JRadioButton("Lines"));
-        centerLeftPanel.add(new JRadioButton("if-statements"));
-        centerLeftPanel.add(new JRadioButton("for-loops"));
-        centerLeftPanel.add(new JRadioButton("while-loops"));
-        centerLeftPanel.add(new JButton("Run"));
+
+        JCheckBox checkBoxComments = new JCheckBox("Comments");
+        centerLeftPanel.add(checkBoxComments);
+        JCheckBox checkBoxLines = new JCheckBox("Lines");
+        centerLeftPanel.add(checkBoxLines);
+        JCheckBox checkBoxIf = new JCheckBox("If-Statements");
+        centerLeftPanel.add(checkBoxIf);
+        JCheckBox checkBoxFor = new JCheckBox("For-Loops");
+        centerLeftPanel.add(checkBoxFor);
+        JCheckBox checkBoxWhile = new JCheckBox("While-Loops");
+        centerLeftPanel.add(checkBoxWhile);
+
+        JButton ButtonRun = new JButton("Run");
+        centerLeftPanel.add(ButtonRun);
+        ButtonRun.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    if(checkBoxComments.isSelected()){
+                        //tryout.countComments();
+                        System.out.println("comments");
+                    }
+                    if(checkBoxLines.isSelected()){
+                        //tryout.countLines();
+                        System.out.println("lines");
+                    }
+                    if(checkBoxIf.isSelected()){
+                        //tryout.countIf();
+                        System.out.println("if");
+                    }
+                    if(checkBoxFor.isSelected()){
+                        //tryout.countForLoops();
+                        System.out.println("for");
+                    }
+                    if(checkBoxWhile.isSelected()){
+                        //tryout.countWhileLoopsJava();
+                        System.out.println("while");
+                    }
+            }
+        });
 
         // 5.1.2 Fill centerRightPanel with content
         var languageLabel = new JLabel("Programming language:");
         var languageComboBox = new JComboBox<>(new String[]{"Java", "Python"});
+
+        //6.1 Fill Bottom Panel with content
+        JTextArea results = new JTextArea();
+        results.append("Number of Lines: \n");
+        results.append("Number of Comments: \n");
+        results.append("Number of if-Statements: \n");
+        results.append("Number of for-Loops: \n");
+        results.append("Number of while-Loops: \n");
+
+        //6.2 Add content to Bottom Panel
+        bottomPanel.add(results);
 
         // 3.2.2 Add content to topRightPanel
         centerRightPanel.add(languageLabel);
@@ -90,5 +131,4 @@ public class Gui extends JFrame {
         mainFrame.pack();
         mainFrame.setVisible(true);
     }
-
 }

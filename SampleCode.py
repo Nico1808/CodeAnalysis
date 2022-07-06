@@ -36,7 +36,7 @@ for i in range(1, 100, 5):
     if i % 10 == 0:
         print(i)
 
-berufe = ["Busfahrer, Jurist, Dozent"]
+berufe = ["Busfahrer", "Jurist", "Dozent"]
 
 for s in berufe:
     print (s)
@@ -54,7 +54,11 @@ while i < 10:
         a -= 1
 
 while i == 0:
-    print("hä");
+    print("hä")
+
+#this is not a while loop:
+# while a ==b:
+#   print("blahblah")
 
 while True:
     print("blah")
