@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 public class Gui extends JFrame {
 
-    Gui(String title){
+    Gui(String title) {
         super(title);
     }
 
@@ -28,7 +29,7 @@ public class Gui extends JFrame {
         // 3 Create panels for the top panel
         var topLeftPanel = new JPanel(new BorderLayout());
 
-        // 3.1 Create panels for topLeftPanel 
+        // 3.1 Create panels for topLeftPanel
         var dropFilePanel = new JPanel();
 
         // 3.1.1 Fill dropFilePanel with file chooser
@@ -37,14 +38,16 @@ public class Gui extends JFrame {
         dropFilePanel.add(fileChooser);
 
         // 3.1.2 Fill topLeftFooterPanel with buttons
-        /*var saveButton = new JButton("Save");
-        var deleteButton = new JButton("Delete");
-        topLeftFooterPanel.add(saveButton);
-        topLeftFooterPanel.add(deleteButton);*/
+        /*
+         * var saveButton = new JButton("Save");
+         * var deleteButton = new JButton("Delete");
+         * topLeftFooterPanel.add(saveButton);
+         * topLeftFooterPanel.add(deleteButton);
+         */
 
         // 3.1.3 Add content to topLeftPanel
         topLeftPanel.add(dropFilePanel, BorderLayout.NORTH);
-        
+
         // 3.3 Add content to topPanel
         topPanel.add(topLeftPanel);
 
@@ -71,7 +74,7 @@ public class Gui extends JFrame {
 
         // 5.1.2 Fill centerRightPanel with content
         var languageLabel = new JLabel("Programming language:");
-        var languageComboBox = new JComboBox<>(new String[]{"Java", "Python"});
+        var languageComboBox = new JComboBox<>(new String[] { "Java", "Python" });
 
         // 3.2.2 Add content to topRightPanel
         centerRightPanel.add(languageLabel);
@@ -92,51 +95,44 @@ public class Gui extends JFrame {
         centerPanel.setBorder(BorderFactory.createTitledBorder(etchedBorder, "Choose options:"));
         bottomPanel.setBorder(BorderFactory.createTitledBorder(etchedBorder, "Match results:"));
 
-        JTextArea results = new JTextArea(); //Erzeugen des Ergebnistextfeldes
+        JTextArea results = new JTextArea(); // Erzeugen des Ergebnistextfeldes
         results.setEditable(false);
         ButtonRun.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Analyzer analyzer;
+                if (languageComboBox.getSelectedItem().equals("Java")) {
+                    analyzer = new Analyzer("sampleCode.java");
+                } else {
+                    analyzer = new Analyzer("SampleCode.py");
+                }
                 results.setText("");
+                String language = languageComboBox.getSelectedItem().toString();
 
-                try{
-                    if(languageComboBox.getSelectedItem().equals("Java")){
-                        if(checkBoxLines.isSelected()) {
-                            results.append("Number of Lines: \n");
-                        }
-                        if(checkBoxComments.isSelected()){
-                            results.append("Number of Comments: \n");
-                        }
-                        if(checkBoxIf.isSelected()) {
-                            results.append("Number of if-Statements: \n");
-                        }
-                        if(checkBoxFor.isSelected()) {
-                            results.append("Number of for-Loops: \n");
-                        }
-                        if(checkBoxWhile.isSelected()) {
-                            results.append("Number of while-Loops: " + tryout.countWhileLoopsJava("sampleCode.java") + "\n");
-                        }
+                if (checkBoxLines.isSelected()) {
+                    ;
+                    results.append("Number of Lines: " + analyzer.resultMatcher(language + "Lines") + " \n");
+                }
+                if (checkBoxComments.isSelected()) {
+                    results.append(
+                            "Number of Comments: " + (analyzer.resultMatcher(language + "Comments")+analyzer.resultMatcher(language+"MultiComments")) + "\n");
+                }
+
+                if (checkBoxIf.isSelected()) {
+                    results.append(
+                            "Number of if-Statements: " + analyzer.resultMatcher(language + "If") + "\n");
+                }
+                if (checkBoxFor.isSelected()) {
+                    results.append(
+                            "Number of for-Loops: " + analyzer.resultMatcher(language + "For") + "\n");
+                    if (language == "Java") {
+                        results.append("Number of for-each-loops: "
+                                + analyzer.resultMatcher(language + "ForEach") + "\n");
                     }
-                    if(languageComboBox.getSelectedItem().equals("Python")){
-                        if(checkBoxLines.isSelected()) {
-                            results.append("Number of Lines: \n");
-                        }
-                        if(checkBoxComments.isSelected()){
-                            results.append("Number of Comments: \n");
-                        }
-                        if(checkBoxIf.isSelected()) {
-                            results.append("Number of if-Statements: \n");
-                        }
-                        if(checkBoxFor.isSelected()) {
-                            results.append("Number of for-Loops: \n");
-                        }
-                        if(checkBoxWhile.isSelected()) {
-                            results.append("Number of while-Loops: " + tryout.countWhileLoopsPython("sampleCode.py") + "\n");
-                        }
-                    }
-                } catch (IOException ioException){
-                    ioException.printStackTrace();
-                    System.out.println(ioException.getMessage());
+                }
+                if (checkBoxWhile.isSelected()) {
+                    results.append(
+                            "Number of while-Loops: " + analyzer.resultMatcher(language + "Lines") + "\n");
                 }
                 bottomPanel.add(results);
                 mainFrame.pack();
