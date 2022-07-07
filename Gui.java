@@ -1,18 +1,26 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.regex.Pattern;
 
 public class Gui extends JFrame {
 
+    private String absoluteFilePath;
+
     Gui(String title) {
         super(title);
+        absoluteFilePath = "";
+    }
+
+    public String getAbsoluteFilePath() {
+        return absoluteFilePath;
+    }
+
+    public void setAbsoluteFilePath(String absoluteFilePath) {
+        this.absoluteFilePath = absoluteFilePath;
     }
 
     public static void main(String[] args) {
@@ -30,20 +38,16 @@ public class Gui extends JFrame {
         var topLeftPanel = new JPanel(new BorderLayout());
 
         // 3.1 Create panels for topLeftPanel
+        var selectFileButton = new JButton("Select a file!");
+        var selectedFileLabel = new JLabel("Currently no file selected");
         var dropFilePanel = new JPanel();
 
         // 3.1.1 Fill dropFilePanel with file chooser
         var fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
-        fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
-        dropFilePanel.add(fileChooser);
-
-        // 3.1.2 Fill topLeftFooterPanel with buttons
-        /*
-         * var saveButton = new JButton("Save");
-         * var deleteButton = new JButton("Delete");
-         * topLeftFooterPanel.add(saveButton);
-         * topLeftFooterPanel.add(deleteButton);
-         */
+        var pyFilter = new FileNameExtensionFilter("Python files", "py");
+        var javaFilter = new FileNameExtensionFilter("Java files", "java");
+        dropFilePanel.add(selectFileButton);
+        dropFilePanel.add(selectedFileLabel);
 
         // 3.1.3 Add content to topLeftPanel
         topLeftPanel.add(dropFilePanel, BorderLayout.NORTH);
@@ -76,6 +80,32 @@ public class Gui extends JFrame {
         var languageLabel = new JLabel("Programming language:");
         var languageComboBox = new JComboBox<>(new String[] { "Java", "Python" });
 
+        // Adding action listener to selectFileButton
+        selectFileButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                if (languageComboBox.getSelectedItem().equals("Java")) {
+                    fileChooser.setFileFilter(javaFilter);
+                } else {
+                     fileChooser.setFileFilter(pyFilter);
+                }
+
+                var returnValue = fileChooser.showDialog(null, "Select");
+                mainFrame.setAbsoluteFilePath("");
+                switch (returnValue){
+                    case JFileChooser.APPROVE_OPTION -> {
+                        mainFrame.setAbsoluteFilePath(fileChooser.getSelectedFile().getAbsolutePath()); 
+                        selectedFileLabel.setText(fileChooser.getSelectedFile().getName());
+                        mainFrame.pack();
+                    }
+                    case JFileChooser.CANCEL_OPTION -> mainFrame.setAbsoluteFilePath("");
+                }
+            }
+            
+        });
+
         // 3.2.2 Add content to topRightPanel
         centerRightPanel.add(languageLabel);
         centerRightPanel.add(languageComboBox);
@@ -100,12 +130,10 @@ public class Gui extends JFrame {
         ButtonRun.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Analyzer analyzer;
-                if (languageComboBox.getSelectedItem().equals("Java")) {
-                    analyzer = new Analyzer("sampleCode.java");
-                } else {
-                    analyzer = new Analyzer("SampleCode.py");
+                if (mainFrame.getAbsoluteFilePath().isEmpty()){
+                    return;
                 }
+                Analyzer analyzer = new Analyzer(mainFrame.getAbsoluteFilePath());
                 results.setText("");
                 String language = languageComboBox.getSelectedItem().toString();
 
@@ -115,7 +143,7 @@ public class Gui extends JFrame {
                 }
                 if (checkBoxComments.isSelected()) {
                     results.append(
-                            "Number of Comments: " + (analyzer.resultMatcher(language + "Comments")+analyzer.resultMatcher(language+"MultiComments")) + "\n");
+                            "Number of Comments: " + (analyzer.resultMatcher(language + "Comment")+analyzer.resultMatcher(language+"MultiComment")) + "\n");
                 }
 
                 if (checkBoxIf.isSelected()) {

@@ -1,14 +1,10 @@
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Analyzer {
 
@@ -20,7 +16,7 @@ public class Analyzer {
     private CharSequence fileContent;
     private CharSequence patterns;
 
-    public void setFileContent(String fileName){
+    public void setFileContent(String fileName) {
         this.fileContent = getCharSequence(fileName);
     }
 
@@ -50,14 +46,12 @@ public class Analyzer {
 
     public long resultMatcher(String userInput) {
         Pattern USER_INPUT = Pattern.compile(userInput + "\\s+(.+)");
-        System.out.println(USER_INPUT.toString());
         Matcher mUi = USER_INPUT.matcher(patterns);
-        if (!mUi.find()){
+        if (!mUi.find()) {
             return 0;
         }
         Pattern FINAL_PATTERN = Pattern
                 .compile(mUi.group(1));
-        System.out.println(FINAL_PATTERN.toString());
         Matcher mui = FINAL_PATTERN.matcher(fileContent);
         return mui.results().count();
     }

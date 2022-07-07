@@ -1,7 +1,7 @@
 hallo HalloTest
 JavaLines \n
 PythonLines .
-JavaComment //.
+JavaComment //.*
 JavaMultiComment /[*](.|[\r\n])*?[*]/
 PythonComment .
 JavaIf if[(].*?[)]
@@ -10,5 +10,5 @@ JavaFor (for\s*)([(].*?;.*?;.*?[)])(\s*[{]?)
 PythonFor (for\s*)(.*?in\\s)(\s*.*?):
 JavaForEach (for\s*)([(].*?:.*?[)])(\s*[{]?)
 JavaWhile (while\s*?[(].*?[)]s*?[{]?)(?!;)
-JavaDoWhile (do\s*?[{]?.*?[}]?)
+JavaDoWhile (do\s*?[{].*?[}]?)
 PythonWhile (while\s*?.*?:)
