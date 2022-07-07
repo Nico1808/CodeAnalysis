@@ -44,8 +44,8 @@ public class Gui extends JFrame {
 
         // 3.1.1 Fill dropFilePanel with file chooser
         var fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
-        var pyFilter = new FileNameExtensionFilter("Python files", "py");
-        var javaFilter = new FileNameExtensionFilter("Java files", "java");
+        var pyJavaFilter = new FileNameExtensionFilter("Python and Jave files", "py", "java");
+        fileChooser.setFileFilter(pyJavaFilter);
         dropFilePanel.add(selectFileButton);
         dropFilePanel.add(selectedFileLabel);
 
@@ -86,11 +86,6 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                if (languageComboBox.getSelectedItem().equals("Java")) {
-                    fileChooser.setFileFilter(javaFilter);
-                } else {
-                     fileChooser.setFileFilter(pyFilter);
-                }
 
                 var returnValue = fileChooser.showDialog(null, "Select");
                 mainFrame.setAbsoluteFilePath("");
@@ -143,7 +138,9 @@ public class Gui extends JFrame {
                 }
                 if (checkBoxComments.isSelected()) {
                     results.append(
-                            "Number of Comments: " + (analyzer.resultMatcher(language + "Comment")+analyzer.resultMatcher(language+"MultiComment")) + "\n");
+                        "Number of Comments: " + analyzer.resultMatcher(language + "Comment") + "\n");
+                    results.append(
+                        "Number of Multiline-Comments: " + analyzer.resultMatcher(language+"MultiComment") + "\n");
                 }
 
                 if (checkBoxIf.isSelected()) {

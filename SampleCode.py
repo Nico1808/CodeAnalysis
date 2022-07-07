@@ -22,6 +22,11 @@ n = 314
 
 #sample for-loops:
 
+"""
+erkennt die regex das?
+müssten jetzt 14 kommentare sein
+"""
+
 for x in "busfahrer":
     print (x)
 

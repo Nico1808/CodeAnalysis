@@ -1,11 +1,12 @@
 hallo HalloTest
 JavaLines \n
-PythonLines .
+PythonLines \n
 JavaComment //.*
 JavaMultiComment /[*](.|[\r\n])*?[*]/
-PythonComment .
+PythonComment #.*
+PythonMultiComment (\"{3})(?s)(.*?)(\"{3})
 JavaIf if[(].*?[)]
-PythonIf .
+PythonIf (if.*?:\n)(\t+| +)([^\s])
 JavaFor (for\s*)([(].*?;.*?;.*?[)])(\s*[{]?)
 PythonFor (for\s*)(.*?in\\s)(\s*.*?):
 JavaForEach (for\s*)([(].*?:.*?[)])(\s*[{]?)
