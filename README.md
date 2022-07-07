@@ -6,7 +6,7 @@ Nico:
   -> if-statements
 
 Kevin:
-  -> for-Schleifen
+  -> for-Schleifen & GUI
 
 Adrian:
-  -> while-Schleifen
+  -> while-Schleifen & GUI
