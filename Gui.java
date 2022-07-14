@@ -140,7 +140,7 @@ public class Gui extends JFrame {
                     results.append(
                         "Number of Comments: " + analyzer.resultMatcher(language + "Comment") + "\n");
                     results.append(
-                        "Number of Multiline-Comments: " + analyzer.resultMatcher(language+"MultiComment") + "\n");
+                        "Number of Multiline-Comments: " + analyzer.resultMatcher(language + "MultiComment") + "\n");
                 }
 
                 if (checkBoxIf.isSelected()) {

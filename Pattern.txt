@@ -1,6 +1,6 @@
 hallo HalloTest
-JavaLines \n
-PythonLines \n
+JavaLines (\r\n|\r|\n)
+PythonLines (\r\n|\r|\n)
 JavaComment //.*
 JavaMultiComment /[*](.|[\r\n])*?[*]/
 PythonComment #.*
