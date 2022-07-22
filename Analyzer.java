@@ -51,7 +51,6 @@ public class Analyzer {
         }
         Pattern FINAL_PATTERN = Pattern
                 .compile(mUi.group(1));
-        System.out.println(FINAL_PATTERN.toString());
         Matcher mui = FINAL_PATTERN.matcher(fileContent);
         return mui.results().count();
     }

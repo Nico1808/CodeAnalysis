@@ -44,7 +44,7 @@ public class Gui extends JFrame {
 
         // 3.1.1 Fill dropFilePanel with file chooser
         var fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
-        var pyJavaFilter = new FileNameExtensionFilter("Python and Jave files", "py", "java");
+        var pyJavaFilter = new FileNameExtensionFilter("Python and Java files", "py", "java");
         fileChooser.setFileFilter(pyJavaFilter);
         dropFilePanel.add(selectFileButton);
         dropFilePanel.add(selectedFileLabel);
@@ -86,12 +86,16 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-
                 var returnValue = fileChooser.showDialog(null, "Select");
                 mainFrame.setAbsoluteFilePath("");
                 switch (returnValue){
                     case JFileChooser.APPROVE_OPTION -> {
-                        mainFrame.setAbsoluteFilePath(fileChooser.getSelectedFile().getAbsolutePath()); 
+                        mainFrame.setAbsoluteFilePath(fileChooser.getSelectedFile().getAbsolutePath());
+                        var index = fileChooser.getSelectedFile().toString().lastIndexOf(".");
+                        switch (fileChooser.getSelectedFile().toString().substring(++index)){
+                            case "java" -> languageComboBox.setSelectedItem("Java");
+                            case "py" -> languageComboBox.setSelectedItem("Python");
+                        }
                         selectedFileLabel.setText(fileChooser.getSelectedFile().getName());
                         mainFrame.pack();
                     }
