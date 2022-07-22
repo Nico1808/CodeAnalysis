@@ -46,6 +46,7 @@ public class Analyzer {
     public long resultMatcher(String userInput) {
         Pattern USER_INPUT = Pattern.compile(userInput + "\\s+(.+)");
         Matcher mUi = USER_INPUT.matcher(patterns);
+
         if (!mUi.find()) {
             return 0;
         }
