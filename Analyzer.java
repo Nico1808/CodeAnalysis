@@ -6,18 +6,16 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class Analyzer {
+
+    private CharSequence fileContent;
+    private CharSequence patterns;
 
     Analyzer(String fileName) {
         this.fileContent = getCharSequence(fileName);
         this.patterns = getCharSequence("Pattern.txt");
     }
-
-    private CharSequence fileContent;
-    private CharSequence patterns;
 
     public void setFileContent(String fileName) {
         this.fileContent = getCharSequence(fileName);
