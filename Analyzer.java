@@ -6,6 +6,8 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Analyzer {
 
@@ -53,9 +55,8 @@ public class Analyzer {
         }
         Pattern FINAL_PATTERN = Pattern
                 .compile(mUi.group(1));
-                System.out.println(FINAL_PATTERN);
-
         Matcher mRs = FINAL_PATTERN.matcher(fileContent);
+
         return mRs.results().count();
     }
 

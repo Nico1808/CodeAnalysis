@@ -5,7 +5,7 @@ JavaMultiComment /[*](.|[\r\n])*?[*]/
 PythonComment #.*
 PythonMultiComment (\"{3})(?s)(.*?)(\"{3})
 JavaIf if[(].*?[)]
-PythonIf (if.*?:\n|\r)(\t+|[^\n|^\r]\s+)([^\s])
+PythonIf (if.*?:)(\n|\r\n)(\t+|[^\n|^\r\n]\s+)([^\s])
 JavaFor (for\s*)([(].*?;.*?;.*?[)])(\s*[{]?)
 PythonFor (for\s*)(.*?in\s)(\s*.*?):
 JavaForEach (for\s*)([(].*?:.*?[)])(\s*[{]?)

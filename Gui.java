@@ -81,18 +81,18 @@ public class Gui extends JFrame {
         var languageComboBox = new JComboBox<>(new String[] { "Java", "Python" });
 
         // Adding action listener to selectFileButton
-        selectFileButton.addActionListener(new ActionListener(){
+        selectFileButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 var returnValue = fileChooser.showDialog(null, "Select");
                 mainFrame.setAbsoluteFilePath("");
-                switch (returnValue){
+                switch (returnValue) {
                     case JFileChooser.APPROVE_OPTION -> {
                         mainFrame.setAbsoluteFilePath(fileChooser.getSelectedFile().getAbsolutePath());
                         var index = fileChooser.getSelectedFile().toString().lastIndexOf(".");
-                        switch (fileChooser.getSelectedFile().toString().substring(++index)){
+                        switch (fileChooser.getSelectedFile().toString().substring(++index)) {
                             case "java" -> languageComboBox.setSelectedItem("Java");
                             case "py" -> languageComboBox.setSelectedItem("Python");
                         }
@@ -102,7 +102,7 @@ public class Gui extends JFrame {
                     case JFileChooser.CANCEL_OPTION -> mainFrame.setAbsoluteFilePath("");
                 }
             }
-            
+
         });
 
         // 3.2.2 Add content to topRightPanel
@@ -129,7 +129,7 @@ public class Gui extends JFrame {
         ButtonRun.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (mainFrame.getAbsoluteFilePath().isEmpty()){
+                if (mainFrame.getAbsoluteFilePath().isEmpty()) {
                     return;
                 }
                 Analyzer analyzer = new Analyzer(mainFrame.getAbsoluteFilePath());
@@ -142,9 +142,10 @@ public class Gui extends JFrame {
                 }
                 if (checkBoxComments.isSelected()) {
                     results.append(
-                        "Number of Comments: " + analyzer.resultMatcher(language + "Comment") + "\n");
+                            "Number of Comments: " + analyzer.resultMatcher(language + "Comment") + "\n");
                     results.append(
-                        "Number of Multiline-Comments: " + analyzer.resultMatcher(language + "MultiComment") + "\n");
+                            "Number of Multiline-Comments: " + analyzer.resultMatcher(language + "MultiComment")
+                                    + "\n");
                 }
 
                 if (checkBoxIf.isSelected()) {
@@ -162,8 +163,8 @@ public class Gui extends JFrame {
                 if (checkBoxWhile.isSelected()) {
                     results.append(
                             "Number of while-Loops: " + analyzer.resultMatcher(language + "While") + "\n");
-                    if (language == "Java"){
-                        results.append("Number of do-while-loops: " + analyzer.resultMatcher(language+"DoWhile"));
+                    if (language == "Java") {
+                        results.append("Number of do-while-loops: " + analyzer.resultMatcher(language + "DoWhile"));
                     }
                 }
                 bottomPanel.add(results);
