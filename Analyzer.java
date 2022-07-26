@@ -1,4 +1,5 @@
 import java.io.FileInputStream;
+import java.lang.module.FindException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
@@ -52,8 +53,10 @@ public class Analyzer {
         }
         Pattern FINAL_PATTERN = Pattern
                 .compile(mUi.group(1));
-        Matcher mui = FINAL_PATTERN.matcher(fileContent);
-        return mui.results().count();
+                System.out.println(FINAL_PATTERN);
+
+        Matcher mRs = FINAL_PATTERN.matcher(fileContent);
+        return mRs.results().count();
     }
 
 }
