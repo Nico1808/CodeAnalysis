@@ -62,7 +62,7 @@ while i == 0:
     print("hä")
 
 #this is not a while loop:
-# while a ==b:
+# while a ==b: #
 #   print("blahblah")
 
 while True:
