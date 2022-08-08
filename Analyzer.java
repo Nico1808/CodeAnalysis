@@ -1,5 +1,4 @@
 import java.io.FileInputStream;
-import java.lang.module.FindException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
@@ -21,7 +20,7 @@ public class Analyzer {
         this.fileContent = getCharSequence(fileName);
     }
 
-    public CharSequence getCharSequence(String fileName) {
+    private CharSequence getCharSequence(String fileName) {
         try (FileInputStream fis = new FileInputStream(fileName)) {
 
             FileChannel fc = fis.getChannel();
